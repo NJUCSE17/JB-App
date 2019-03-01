@@ -1,14 +1,35 @@
 import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import { StyleSheet } from 'react-native';
+import SettingsView from '../components/SettingsView';
+import { 
+  Button, 
+  Container, 
+  Footer, 
+  Text 
+} from 'native-base';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    title: 'Settings',
   };
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return (
+      <Container>
+        <SettingsView />
+        <Footer>
+          <Button style={styles.footer_button}>
+            <Text>Logout</Text>
+          </Button>
+        </Footer>
+      </Container>
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  footer_button: {
+    width: "100%",
+    height: "100%",
+  }
+});
