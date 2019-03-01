@@ -7,6 +7,7 @@ import {
   Card,
   CardItem,
   Container,
+  Content,
   Header, 
   Icon,
   Left, 
@@ -15,6 +16,8 @@ import {
   Title, 
 } from 'native-base';
 
+import AssignmentCard from './../components/AssignmentCard';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     headerTitle: "Assignments",
@@ -22,27 +25,30 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <Container style={{ padding: 10 }}>
-        <Card>
-          <CardItem header>
-            <Text>作业标题</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                作业内容blabla
-              </Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Right>
-              <Text>
-                2019-03-01 20:48
-              </Text>
-            </Right>
-          </CardItem>
-        </Card>
+      <Container>
+        <Content style={{ paddingHorizontal: 10 }}>
+          <AssignmentCard />
+          <AssignmentCard />
+          <AssignmentCard />
+          <AssignmentCard />
+          <AssignmentCard />
+          <AssignmentCard />
+        </Content>
       </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  rounded: {
+    borderRadius: 8,
+  },
+  rounded_top: {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+  rounded_buttom: {
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+  }
+});

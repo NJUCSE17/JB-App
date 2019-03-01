@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionList, Image, StyleSheet, Text } from 'react-native';
+import { Image, SectionList, StyleSheet, Text } from 'react-native';
 import { View } from 'native-base';
 import { Constants, WebBrowser } from 'expo';
 
