@@ -14,7 +14,7 @@ export default class AssignmentCard extends React.Component {
     return (
       <Card style={styles.rounded}>
         <CardItem header bordered style={styles.rounded_top}>
-          <Text>{this.props.assignment_name}</Text>
+          <Text>{this.props.course_name} - {this.props.assignment_name}</Text>
         </CardItem>
         <CardItem>
           <Body>

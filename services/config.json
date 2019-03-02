@@ -1,6 +1,6 @@
 {
   "baseURL": "https://njujb.com",
-  "timeout": 3000,
+  "timeout": 5000,
   "clientID": "CLIENT_ID_XXXXXX",
-  "clientSecret": "CLIENT_ID_XXXXXX"
+  "clientSecret": "CLIENT_SECRET_XXXXXX"
 }

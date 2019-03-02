@@ -81,6 +81,7 @@ export default class HomeScreen extends React.Component {
   _renderAssignment = (assignment) => {
     return (
       <AssignmentCard
+        course_name={assignment.course_name}
         assignment_name={assignment.name}
         assignment_content_html={assignment.content_html}
         assignment_due_time={assignment.due_time}
