@@ -36,7 +36,7 @@ export const login = async (username, password) => {
   const params = {
     grant_type: 'password',
     client_id: Config.clientID,
-    client_secret: Config.clientSecret,
+    client_secret: atob(Config.clientSecret),
     username: username,
     password: password
   };

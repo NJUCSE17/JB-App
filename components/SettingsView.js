@@ -15,12 +15,10 @@ export default class SettingsView extends React.Component {
   }
 
   render() {
-    const { expoVersion, manifest } = Constants;
+    const { manifest } = Constants;
     const sections = [
       { data: [{ value: this.state.username }], title: 'Username (Student ID)' },
-      { data: [{ value: expoVersion }], title: 'Expo Version' },
-      { data: [{ value: manifest.sdkVersion }], title: 'SDK Version' },
-      { data: [{ value: manifest.version }], title: 'version' },
+      { data: [{ value: manifest.version }], title: 'Version' },
       { data: [{ value: (
         <Text 
           style={{ textDecorationLine: "underline" }} 

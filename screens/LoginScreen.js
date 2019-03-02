@@ -64,7 +64,7 @@ export default class LoginScreen extends React.Component {
                     onChangeText={(password) => this.setState({password})} 
                   />
                 </Item>
-                <Button iconLeft full bordered 
+                <Button iconLeft full success
                   style={[styles.rounded, styles.auth_button]}
                   onPress={this._handleLogin.bind(this)}
                 >
