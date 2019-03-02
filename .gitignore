@@ -259,3 +259,5 @@ buck-out/
 .buckd/
 .buckversion
 .fakebuckversion
+
+services/config\.json
