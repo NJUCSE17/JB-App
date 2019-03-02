@@ -1,24 +1,27 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { WebBrowser } from 'expo';
+import { Alert, AsyncStorage, StyleSheet, RefreshControl } from 'react-native';
 import { 
-  Body, 
-  Button,
-  Card,
-  CardItem,
   Container,
   Content,
-  Header, 
-  Icon,
-  Left, 
-  Right, 
-  Text, 
-  Title, 
+  List,
+  Toast
 } from 'native-base';
 
-import AssignmentCard from './../components/AssignmentCard';
+import * as API from '../services/api';
+import AssignmentCard from '../components/AssignmentCard';
 
 export default class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      refreshing: false,
+      assignments: {}
+    }
+
+    this._init();
+  }
+
   static navigationOptions = {
     headerTitle: "Assignments",
   };
@@ -26,29 +29,80 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <Container>
-        <Content style={{ paddingHorizontal: 10 }}>
-          <AssignmentCard />
-          <AssignmentCard />
-          <AssignmentCard />
-          <AssignmentCard />
-          <AssignmentCard />
-          <AssignmentCard />
+        <Content
+          contentContainerStyle={ styles.main_content }
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._updateAssignments}
+              colors={['red','orange']}
+            />
+          }
+        >
+          <List 
+            dataArray={this.state.assignments}
+            renderRow={this._renderAssignment}
+          />
         </Content>
       </Container>
+    );
+  }
+
+  _init = async () => {
+    const assignments_string = await AsyncStorage.getItem('assignments');
+    if (assignments_string) {
+      this.setState({ assignments: JSON.parse(assignments_string) });
+    }
+    this._updateAssignments();
+  }
+
+  _updateAssignments = async () => {
+    this.setState({ refreshing: true });
+    try {
+      const assignments = await API.getAssignments();
+      this.setState({assignments});
+      await AsyncStorage.setItem('assignments', JSON.stringify(assignments));
+      
+      Toast.show({
+        text: "Assignments updated.",
+        buttonText: "OK",
+        duration: 2000
+      });
+    } catch (e) {
+      const { status, message } = e;
+      Alert.alert("Update assignments failed", 
+        "Status: " + (status ? status : "NULL")
+        + "\nMessage: " + (message ? message : "NULL")
+      );
+    }
+    this.setState({ refreshing: false });
+  }
+
+  _renderAssignment = (assignment) => {
+    return (
+      <AssignmentCard
+        assignment_name={assignment.name}
+        assignment_content_html={assignment.content_html}
+        assignment_due_time={assignment.due_time}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
+  main_content: {
+    textAlign: "center",
+    padding: 10,
+  },
   rounded: {
-    borderRadius: 8,
+    borderRadius: 10,
   },
   rounded_top: {
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   rounded_buttom: {
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   }
 });

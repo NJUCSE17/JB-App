@@ -1,29 +1,31 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, WebView } from 'react-native';
 import {
   Body,
   Card,
   CardItem,
+  Content,
   Text
 } from 'native-base';
+import HTMLView from 'react-native-htmlview';
 
 export default class AssignmentCard extends React.Component {
   render() {
     return (
       <Card style={styles.rounded}>
         <CardItem header bordered style={styles.rounded_top}>
-          <Text>作业标题</Text>
+          <Text>{this.props.assignment_name}</Text>
         </CardItem>
         <CardItem>
           <Body>
-            <Text>
-              作业内容blabla
-            </Text>
+            <Content>
+              <HTMLView value={this.props.assignment_content_html}/>
+            </Content>
           </Body>
         </CardItem>
         <CardItem bordered style={styles.rounded_buttom}>
           <Text style={{ width: "100%", textAlign: "right" }}>
-            {`DDL 2019-03-01 20:48\n大概114514小时后`}
+            DDL {this.props.assignment_due_time}
           </Text>
         </CardItem>
       </Card>

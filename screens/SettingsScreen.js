@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, StyleSheet } from 'react-native';
+import { Alert, AsyncStorage, StyleSheet } from 'react-native';
 import SettingsView from '../components/SettingsView';
 import { 
   Button, 
@@ -29,16 +29,16 @@ export default class SettingsScreen extends React.Component {
     )
   }
 
-  _handleLogout = () => {
+  _handleLogout = async () => {
     Alert.alert(
       'Logout', 'Are you sure you want to logout?', 
       [
         {text: 'Cancel', style: 'cancel'},
         {
           text: 'Logout',
-          onPress: () => {
-            Alert.alert('TODO', 'Logout not implemented.');
-            // TODO: implement revoke tokens
+          onPress: async () => {
+            await AsyncStorage.removeItem('token');
+            await AsyncStorage.removeItem('username');
             this.props.navigation.navigate('Init');
           },
         },

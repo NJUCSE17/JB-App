@@ -16,7 +16,18 @@ import {
   View
 } from 'native-base';
 
+import * as API from './../services/api';
+
 export default class LoginScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+    }
+  }
+
   static navigationOptions = {
     headerTitle: "Login to JB App",
   }
@@ -26,43 +37,64 @@ export default class LoginScreen extends React.Component {
 
     return (
       <Container style={styles.container}>
-        <View style={styles.view}>
-          <Image 
-            source={require('./../assets/images/icon.png')} 
-            style={styles.icon}
-          />
-          <Text style={styles.app_name}>{manifest.name}</Text>
-        </View>
-        <Card style={styles.rounded}>
-          <CardItem style={styles.rounded}>
-            <Body>
-              <Item floatingLabel style={styles.auth_input}>
-                <Icon active type="FontAwesome" name="user" />
-                <Label icon>Username (Student ID)</Label>
-                <Input/>
-              </Item>
-              <Item floatingLabel style={styles.auth_input}>
-                <Icon active type="FontAwesome" name="lock" />
-                <Label icon>Password</Label>
-                <Input />
-              </Item>
-              <Button iconLeft full bordered 
-                style={[styles.rounded, styles.auth_button]}
-                onPress={this._handleLogin.bind(this)}
-              >
-                <Icon type='FontAwesome' name='sign-in' />
-                <Text>Login</Text>
-              </Button>
-            </Body>
-          </CardItem>
-        </Card>
+        <Content>
+          <View style={styles.view}>
+            <Image 
+              source={require('./../assets/images/icon.png')} 
+              style={styles.icon}
+            />
+            <Text style={styles.app_name}>{manifest.name}</Text>
+          </View>
+          <Card style={styles.rounded}>
+            <CardItem style={styles.rounded}>
+              <Body>
+                <Item floatingLabel style={styles.auth_input}>
+                  <Icon active type="FontAwesome" name="user" />
+                  <Label icon>Username (Student ID)</Label>
+                  <Input ref="username" 
+                    keyboardType="decimal-pad"
+                    onChangeText={(username) => this.setState({username})} 
+                  />
+                </Item>
+                <Item floatingLabel style={styles.auth_input}>
+                  <Icon active type="FontAwesome" name="lock" />
+                  <Label icon>Password</Label>
+                  <Input ref="password" 
+                    secureTextEntry={true} 
+                    onChangeText={(password) => this.setState({password})} 
+                  />
+                </Item>
+                <Button iconLeft full bordered 
+                  style={[styles.rounded, styles.auth_button]}
+                  onPress={this._handleLogin.bind(this)}
+                >
+                  <Icon type='FontAwesome' name='sign-in' />
+                  <Text>Login</Text>
+                </Button>
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
       </Container>
     )
   }
 
-  _handleLogin = () => {
-    Alert.alert('TODO', 'API Login not implemented.');
-    this.props.navigation.navigate('Main');
+  _handleLogin = async () => {
+    try {
+      let username = this.state.username, password = this.state.password;
+      if (!username || !password) {
+        Alert.alert("Error", "Username and password must be set.");
+      } else {
+        await API.login(username, password);
+        this.props.navigation.navigate('Main');
+      }
+    } catch (e) {
+      const { status, message } = e;
+      Alert.alert("Login failed", 
+        "Status: " + (status ? status : "NULL")
+        + "\nMessage: " + (message ? message : "NULL")
+      );
+    }
   }
 }
 

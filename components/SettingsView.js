@@ -1,14 +1,23 @@
 import React from 'react';
-import { Image, SectionList, StyleSheet, Text } from 'react-native';
+import { AsyncStorage, Image, SectionList, StyleSheet, Text } from 'react-native';
 import { View } from 'native-base';
 import { Constants, WebBrowser } from 'expo';
 
 export default class SettingsView extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: ''
+    }
+
+    this._getUsername();
+  }
+
   render() {
     const { expoVersion, manifest } = Constants;
     const sections = [
-      { data: [{ value: "171860508" }], title: 'Student ID' },
-      { data: [{ value: "Aunt" }], title: 'Username' },
+      { data: [{ value: this.state.username }], title: 'Username (Student ID)' },
       { data: [{ value: expoVersion }], title: 'Expo Version' },
       { data: [{ value: manifest.sdkVersion }], title: 'SDK Version' },
       { data: [{ value: manifest.version }], title: 'version' },
@@ -32,6 +41,11 @@ export default class SettingsView extends React.Component {
         sections={sections}
       />
     );
+  }
+
+  _getUsername = async () => {
+    const username = await AsyncStorage.getItem('username');
+    this.setState({username});
   }
 
   _openGitHubURL = () => {
