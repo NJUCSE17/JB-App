@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Alert, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 import { stringify } from 'querystring';
+import { Base64 } from 'js-base64';
 
 import * as Config from './config';
 
@@ -36,7 +37,7 @@ export const login = async (username, password) => {
   const params = {
     grant_type: 'password',
     client_id: Config.clientID,
-    client_secret: atob(Config.clientSecret),
+    client_secret: Base64.decode(Config.clientSecret),
     username: username,
     password: password
   };

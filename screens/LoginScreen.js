@@ -25,6 +25,7 @@ export default class LoginScreen extends React.Component {
     this.state = {
       username: '',
       password: '',
+      disableAuthButton: false,
     }
   }
 
@@ -65,6 +66,7 @@ export default class LoginScreen extends React.Component {
                   />
                 </Item>
                 <Button iconLeft full success
+                  disabled={this.state.disableAuthButton}
                   style={[styles.rounded, styles.auth_button]}
                   onPress={this._handleLogin.bind(this)}
                 >
@@ -81,6 +83,7 @@ export default class LoginScreen extends React.Component {
 
   _handleLogin = async () => {
     try {
+      this.setState({ disableAuthButton: true });
       let username = this.state.username, password = this.state.password;
       if (!username || !password) {
         Alert.alert("Error", "Username and password must be set.");
@@ -94,6 +97,7 @@ export default class LoginScreen extends React.Component {
         "Status: " + (status ? status : "NULL")
         + "\nMessage: " + (message ? message : "NULL")
       );
+      this.setState({ disableAuthButton: false });
     }
   }
 }
