@@ -22,8 +22,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.njujb.jbapp"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.njujb.jbapp"
     },
     "githubUrl": "https://github.com/NJUCSE17/JB-App"
   }
