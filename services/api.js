@@ -7,7 +7,7 @@ import * as Config from './config';
 
 const instance = axios.create({
   baseURL: Config.baseURL,
-  timeout: 1500,
+  timeout: Config.timeout,
   headers: {
     'Accept': 'application/json'
   }
