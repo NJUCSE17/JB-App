@@ -1,10 +1,10 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import Colors from '../constants/Colors';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -14,10 +14,16 @@ HomeStack.navigationOptions = {
   tabBarLabel: 'Assignments',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
-      focused={focused}
       name='edit'
+      focused={focused}
+      activeColor={Colors.primary}
+      inactiveColor={Colors.grey}
     />
   ),
+  tabBarOptions: {
+    activeTintColor: Colors.primary,
+    inactiveTintColor: Colors.grey,
+  }
 };
 
 const SettingsStack = createStackNavigator({
@@ -28,10 +34,16 @@ SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
-      focused={focused}
       name='cog'
+      focused={focused}
+      activeColor={Colors.secondary}
+      inactiveColor={Colors.grey}
     />
   ),
+  tabBarOptions: {
+    activeTintColor: Colors.secondary,
+    inactiveTintColor: Colors.grey,
+  }
 };
 
 export default createBottomTabNavigator({
