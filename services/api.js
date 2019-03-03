@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Alert, AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
-import { stringify } from 'querystring';
+import { stringify } from 'qs';
 import { Base64 } from 'js-base64';
 
 import * as Config from './config';
