@@ -7,10 +7,15 @@ import {
   Footer, 
   Text 
 } from 'native-base';
+import Colors from '../constants/Colors';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'Settings',
+    headerTintColor: Colors.white,
+    headerStyle: {
+      backgroundColor: Colors.secondaryDark,
+    },
   };
 
   render() {
@@ -49,8 +54,8 @@ export default class SettingsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   footer_rounded: {
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   footer_button: {
     width: "100%",

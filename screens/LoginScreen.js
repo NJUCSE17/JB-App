@@ -17,6 +17,7 @@ import {
 } from 'native-base';
 
 import * as API from './../services/api';
+import Colors from '../constants/Colors';
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
@@ -31,6 +32,10 @@ export default class LoginScreen extends React.Component {
 
   static navigationOptions = {
     headerTitle: "Login to JB App",
+    headerTintColor: Colors.white,
+    headerStyle: {
+      backgroundColor: Colors.success,
+    },
   }
 
   render() {

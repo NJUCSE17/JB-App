@@ -5,27 +5,27 @@ import {
   Card,
   CardItem,
   Content,
-  Text
+  Text,
+  Textarea
 } from 'native-base';
-import HTMLView from 'react-native-htmlview';
+import Colors from '../constants/Colors';
 
 export default class AssignmentCard extends React.Component {
   render() {
     return (
       <Card style={styles.rounded}>
-        <CardItem header bordered style={styles.rounded_top}>
-          <Text style={{color: 'black'}}>{this.props.course_name} - {this.props.assignment_name}</Text>
+        <CardItem header bordered 
+          style={[styles.rounded_top, {}]}>
+          <Text style={{color: 'black'}}>New Assignment</Text>
         </CardItem>
         <CardItem>
           <Body>
-            <Content>
-              <HTMLView value={this.props.assignment_content_html}/>
-            </Content>
+            <Textarea bordered placeholder="没做好的内容" style={{width: "100%", height: 80}}></Textarea>
           </Body>
         </CardItem>
         <CardItem bordered style={styles.rounded_buttom}>
           <Text style={{ width: "100%", textAlign: "right" }}>
-            DDL {this.props.assignment_due_time}
+            DDL （没做好）
           </Text>
         </CardItem>
       </Card>

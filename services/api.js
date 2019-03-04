@@ -53,10 +53,11 @@ export const getAssignments = async () => {
   const token = await _getToken();
   return await instance.get('/api/assignments', {
       headers: { 'Authorization': token.token_type + " " + token.access_token }
-    }).then((res) => {
+    }).then(async (res) => {
       const { assignments } = res.data;
       if (assignments) {
         console.log("Fetched assignments from server.");
+        await AsyncStorage.setItem('assignments', JSON.stringify(assignments));
         return assignments;
       } else {
         throw { message: 'Bad data.' };

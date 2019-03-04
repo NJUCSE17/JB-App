@@ -9,6 +9,7 @@ import {
 
 import * as API from '../services/api';
 import AssignmentCard from '../components/AssignmentCard';
+import Colors from '../constants/Colors';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -24,6 +25,10 @@ export default class HomeScreen extends React.Component {
 
   static navigationOptions = {
     title: 'Assignments',
+    headerTintColor: Colors.white,
+    headerStyle: {
+      backgroundColor: Colors.primaryDark,
+    },
   };
 
   render() {
@@ -35,7 +40,7 @@ export default class HomeScreen extends React.Component {
             <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._updateAssignments}
-              colors={['red','orange']}
+              colors={[Colors.primaryDark, Colors.secondaryDark, Colors.defaultDark]}
             />
           }
         >
@@ -61,12 +66,18 @@ export default class HomeScreen extends React.Component {
     try {
       const assignments = await API.getAssignments();
       this.setState({assignments});
-      await AsyncStorage.setItem('assignments', JSON.stringify(assignments));
       
       Toast.show({
         text: "Assignments updated.",
         buttonText: "OK",
-        duration: 2000
+        duration: 2000,
+        style: [
+          styles.rounded,
+          {
+            marginHorizontal: 10,
+            marginBottom: 60,
+          }
+        ]
       });
     } catch (e) {
       const { status, message } = e;
