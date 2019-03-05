@@ -4,6 +4,8 @@ Mobile application of [JB-Online](https://github.com/NJUCSE17/JB-Online). Built 
 
 Legacy (Java) version of this app can be found at [JB-App-Legacy](https://github.com/NJUCSE17/JB-App-Legacy), but it is no longer maintained.
 
+> There will NOT be an PUBLIC iOS version unless, 1) a secure PAID Apple Developer ID is provided to the maintainer or to the elite class by a classmate, or 2) Expo and related SDKs are ejected and the project is built on one's own, or are deprecated and replaced with alternatives in the project.
+
 ## Getting Started
 
 ### Project Structure
