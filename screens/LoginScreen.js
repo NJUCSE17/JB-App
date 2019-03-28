@@ -50,6 +50,7 @@ export default class LoginScreen extends React.Component {
               style={styles.icon}
             />
             <Text style={styles.app_name}>{manifest.name}</Text>
+            <Text style={styles.app_version}>v{manifest.version}</Text>
           </View>
           <Card style={styles.rounded}>
             <CardItem style={styles.rounded}>
@@ -126,6 +127,10 @@ const styles = StyleSheet.create({
   app_name: {
     letterSpacing: 1.2,
     fontSize: 36,
+  },
+  app_version: {
+    letterSpacing: 1.0,
+    fontSize: 24,
   },
   auth_input: {
     marginVertical: 8,
